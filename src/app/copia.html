@@ -1,0 +1,26 @@
+<div *ngIf="logueado; else notLoggedInContent" class="logged-in">
+    <!-- Contenido que se mostrará si el usuario está logueado -->
+    <div class="menu">
+      <button (click)="cerrarSesion()" class="btn btn-primary">Cerrar Sesión</button>
+    </div>
+  </div>
+  
+  <ng-template #notLoggedInContent>
+    <!-- Contenido que se mostrará si el usuario no está logueado -->
+    <div class="not-logged-in">
+      <p>Por favor, inicia sesión para acceder al sistema.</p>
+      <app-login (loginOKEvent)="handleEventLoginOK($event)" (loginERROREvent)="handleEventLoginERROR($event)"></app-login>
+    </div>
+  </ng-template>
+  
+  <div *ngIf="error" class="error">
+    <!-- Mostrar componente de error si hay un error -->
+    <app-error></app-error>
+  </div>
+  
+  <!-- Mostrar información de depuración -->
+  <div class="debug-info">
+    <p>Logueado = {{ logueado }}</p>
+    <p>Error = {{ error }}</p>
+    <p>Usuario Logueado.nombre = {{ usuarioLogueado?.nombre }}</p>
+  </div>
